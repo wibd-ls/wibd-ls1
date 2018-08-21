@@ -53,14 +53,10 @@ def updateTable(tableToUpdate, imagePath, yr):
             putItemToDb(tableToUpdate, imagePath, yr) 
 
 def parseS3Bucket(s3, bucketName):
-    image_count = 1;
-    for image in s3.Bucket(bucketName).objects.filter(Prefix='1'):
-        if image_count > 1:
-            return;
+     for image in s3.Bucket(bucketName).objects.filter(Prefix='1'):
         image_path = 's3://' + bucketName + '/' + image.key
         text = parseImg(image)
         year = getYear(text)
-        image_count += 1;
         print("image path is "+image_path+" and patented year is "+year)
         updateTable(table,image_path,year)
                
