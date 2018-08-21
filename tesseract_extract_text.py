@@ -53,6 +53,8 @@ def updateTable(tableToUpdate, imagePath, yr):
             putItemToDb(tableToUpdate, imagePath, yr) 
 
 def parseS3Bucket(s3, bucketName):
+     dynamodb = boto3.resource('dynamodb',region_name='us-east-2')
+     table = dynamodb.Table('wibd-ls1')
      for image in s3.Bucket(bucketName).objects.filter(Prefix='1'):
         image_path = 's3://' + bucketName + '/' + image.key
         text = parseImg(image)
@@ -62,8 +64,6 @@ def parseS3Bucket(s3, bucketName):
                
 if __name__ == "__main__":
     pytesseract.pytesseract.tesseract_cmd=r'D:/Installables/Big_Data/tesseract-Win64/tesseract.exe'
-    dynamodb = boto3.resource('dynamodb',region_name='us-east-2')
-    table = dynamodb.Table('wibd-ls1')
     s3 = boto3.resource('s3')
     bucketName = 'wibd-ls1'
     parseS3Bucket(s3, bucketName)
