@@ -29,7 +29,7 @@ def parsePatent(text):
         text = text.group(1)
         patent = re.match('.*?([0-9]{4,5})$', text)
         if patent is not None:
-            return patent
+            return patent.group(1)
     return ""
 
 def getPatent(rekognition, bucket, key):
@@ -78,8 +78,8 @@ def parseS3Bucket(s3, bucketName):
         image_path = 's3://' + bucketName + '/' + image.key
         text = parseImg(image)
         year = getYear(text)
-        print("image path is "+image_path+" and patented year is "+year)
-        updateTable(table,image_path,year, patent)
+        print("image path is "+image_path+", year is "+year+", and patent is "+patent)
+        updateTable(table, image_path, year, patent)
                
 if __name__ == "__main__":
     pytesseract.pytesseract.tesseract_cmd=r'D:/Installables/Big_Data/tesseract-Win64/tesseract.exe'
