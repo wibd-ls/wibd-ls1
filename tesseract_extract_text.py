@@ -70,23 +70,19 @@ def updateTable(tableToUpdate, imagePath, yr, p_number):
             putItemToDb(tableToUpdate, imagePath, yr, p_number)
 
 def parseS3Bucket(s3, bucketName):
-    image_count = 1
+    dynamodb = boto3.resource('dynamodb',region_name='us-east-2')
+    table = dynamodb.Table('wibd-ls1')
     rekognition = boto3.client('rekognition', region_name='us-east-2')
     for image in s3.Bucket(bucketName).objects.filter(Prefix='1'):
-        if image_count > 1:
-            return
         patent = getPatent(rekognition, bucketName, image.key)
         image_path = 's3://' + bucketName + '/' + image.key
         text = parseImg(image)
         year = getYear(text)
-        image_count += 1
         print("image path is "+image_path+" and patented year is "+year)
         updateTable(table,image_path,year, patent)
                
 if __name__ == "__main__":
     pytesseract.pytesseract.tesseract_cmd=r'D:/Installables/Big_Data/tesseract-Win64/tesseract.exe'
-    dynamodb = boto3.resource('dynamodb',region_name='us-east-2')
-    table = dynamodb.Table('wibd-ls1')
     s3 = boto3.resource('s3')
     bucketName = 'wibd-ls1'
     parseS3Bucket(s3, bucketName)
