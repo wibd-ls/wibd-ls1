@@ -34,7 +34,7 @@ def parsePatent(text):
 
 def getPatent(rekognition, bucket, key):
     response = rekognition.detect_text(Image={'S3Object': {'Bucket': bucket, 'Name': key}})
-    patent_text = response['TextDetections']['Item']['text_detections'][0]['DetectedText']
+    patent_text = response['TextDetections'][0]['DetectedText']
     patent = parsePatent(patent_text)
     return patent
 
