@@ -11,8 +11,8 @@ curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
 
 #credentials
 
-export AWS_ACCESS_KEY_ID=AKIAIMEWCCL6FIUVOCGQ
-export AWS_SECRET_ACCESS_KEY=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
+export AWS_ACCESS_KEY_ID=secretkey
+export AWS_SECRET_ACCESS_KEY=secretkey
 export AWS_DEFAULT_REGION=us-east-2
 
 
