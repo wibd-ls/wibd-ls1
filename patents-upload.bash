@@ -24,5 +24,4 @@ crontab -l > uploadcron
 echo "0 2 * * * root aws s3 sync “.\patents\” s3://wibd-ls1/ " >> uploadcron
 
 #install new cron file
-
 crontab uploadcron
