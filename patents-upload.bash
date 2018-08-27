@@ -21,7 +21,7 @@ export AWS_DEFAULT_REGION=us-east-2
 #cron job
 
 crontab -l > uploadcron
-echo "01 * * * * aws s3 sync “.\patents\” s3://wibd-ls1/ " >> uploadcron
+echo "0 2 * * * root aws s3 sync “.\patents\” s3://wibd-ls1/ " >> uploadcron
 
 #install new cron file
 
