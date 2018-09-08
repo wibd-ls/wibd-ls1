@@ -79,7 +79,7 @@ def parseS3Bucket(s3, bucketName):
     dynamodb = boto3.resource('dynamodb',region_name='us-east-2')
     table = dynamodb.Table('patent-main')
     rekognition = boto3.client('rekognition', region_name='us-east-2')
-    for image in s3.Bucket(bucketName).objects.filter(Prefix='1897(27201-27400)/img593.jpg'):
+    for image in s3.Bucket(bucketName).objects.filter(Prefix='1'):
         patent = getPatent(rekognition, bucketName, image.key)
        # if(not image.key.startswith('1891') and not image.key.startswith('1897(27201')):
         image_path = 's3://' + bucketName + '/' + image.key
