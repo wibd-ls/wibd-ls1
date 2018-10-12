@@ -13,12 +13,10 @@ import com.amazonaws.services.s3.event.S3EventNotification;
 
 import wibd.ls.ml.util.AWSClient;
 import wibd.ls.ml.util.EnvironmentConstants;
-import wibd.ls.ml.util.TextExtraction;
 
 public class RekognitionHandler implements RequestHandler<S3Event, String> {
 	AmazonRekognition rekognitionClient = AmazonRekognitionClientBuilder.standard().withRegion(EnvironmentConstants.region).build();
 	AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withRegion(Regions.US_EAST_2).build();
-	TextExtraction textExtract = new TextExtraction();
 	AWSClient awsClient = new AWSClient();
 	public String handleRequest(S3Event input, Context context) {
 		String alltext = "";
