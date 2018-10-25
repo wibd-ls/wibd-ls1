@@ -15,5 +15,6 @@ export AWS_ACCESS_KEY_ID=secretkey
 export AWS_SECRET_ACCESS_KEY=secretkey
 export AWS_DEFAULT_REGION=us-east-1
 /usr/local/bin/./aws s3 sync patents s3://wibd-ls1/ 
+mv  -v patents/* patents-uploadcomplete
 
 
