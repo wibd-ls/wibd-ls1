@@ -24,7 +24,7 @@ public class RekognitionTextExtraction {
 		awsClient = new AWSClient();
 	}
 	public void extract(){
-		awsClient.extractText(EnvironmentConstants.BUCKET_NAME, textExtraction.s3Client,textExtraction.rekognitionClient, textExtraction.credentials);
+		awsClient.extractText(EnvironmentConstants.BUCKET_NAME, s3Client,rekognitionClient, credentials);
 	}
 	
 	public static void main(String[] args) {
